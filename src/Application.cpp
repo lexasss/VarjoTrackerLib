@@ -45,7 +45,10 @@ void Application::run(GazeCallback cb)
         std::array<double, 3> gazeAngles{};
         if (update(gazeAngles) && cb)
         {
-            cb(frameInfo->displayTime, gazeAngles[0], gazeAngles[1], gazeAngles[2], headRotation[0], headRotation[1], headRotation[2]);
+            if (!cb(frameInfo->displayTime, gazeAngles[0], gazeAngles[1], gazeAngles[2], headRotation[0], headRotation[1], headRotation[2]))
+            {
+                terminate();
+            }
         }
 
         varjo_FreeFrameInfo(frameInfo);

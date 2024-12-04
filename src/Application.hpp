@@ -10,7 +10,7 @@
 
 #include "GazeTracking.hpp"
 
-typedef void(__stdcall* GazeCallback)(int64_t timestamp,
+typedef bool(__stdcall* GazeCallback)(int64_t timestamp,
     const double gazeX, const double gazeY, const double gazeZ,
     const double headPitch, const double headYaw, const double headRoll);
 
