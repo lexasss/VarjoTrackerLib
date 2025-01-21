@@ -45,7 +45,12 @@ void Application::run(GazeCallback cb)
         std::array<double, 3> gazeAngles{};
         if (update(gazeAngles) && cb)
         {
-            if (!cb(frameInfo->displayTime, gazeAngles[0], gazeAngles[1], gazeAngles[2], headRotation[0], headRotation[1], headRotation[2]))
+            auto eye = &(m_state.eyeMeasurements);
+            if (!cb(frameInfo->displayTime,
+                gazeAngles[0], gazeAngles[1], gazeAngles[2],
+                headRotation[0], headRotation[1], headRotation[2],
+                eye->leftEyeOpenness, eye->leftPupilDiameterInMM,
+                eye->rightEyeOpenness, eye->rightPupilDiameterInMM))
             {
                 terminate();
             }
