@@ -67,7 +67,9 @@ extern "C" _declspec(dllexport) bool Run(GazeCallback gazeCallback) {
     std::cout << "GazeTracking loop started" << std::endl;
 
     try {
-        g_application->run(gazeCallback);
+        if (g_application) {
+            g_application->run(gazeCallback);
+        }
     }
     catch (const std::exception& e) {
         std::cerr << "Critical error caught: " << e.what();
