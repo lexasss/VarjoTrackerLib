@@ -84,7 +84,9 @@ extern "C" _declspec(dllexport) void Terminate() {
     std::cout << "Terminating GazeTracking loop" << std::endl;
 
     try {
-        g_application->terminate();
+        if (g_application) {
+            g_application->terminate();
+        }
     }
     catch (const std::exception& e) {
         std::cerr << "Critical error caught: " << e.what();
